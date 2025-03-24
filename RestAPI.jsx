@@ -1,7 +1,7 @@
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import UserItem from './UserItem';
+import UserItem from './components/useritem/UserItem';
 
 const RestAPI = () => {
   const [users, setUsers] = useState([]);
