@@ -1,26 +1,32 @@
-import {View, Text, FlatList, StyleSheet} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import axios from 'axios';
-import UserItem from './components/useritem/UserItem';
+import UserCard from './components/useritem/UserCard.jsx';
 
 const RestAPI = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
-      .get('https://reqres.in/api/users?per_page=12&authuser=0')
+      .get('https://reqres.in/api/users?page=1&per_page=12')
       .then(res => setUsers(res.data.data))
-      .catch(err => console.error(err));
+      .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User List</Text>
-      <FlatList
-        data={users}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => <UserItem user={item} />}
-      />
+      <ScrollView>
+        {users.map(user => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -28,14 +34,14 @@ const RestAPI = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
     backgroundColor: '#f5f5f5',
-    paddingTop: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginLeft: 30,
-    marginBottom: 15,
+    textAlign: 'center',
+    marginBottom: 10,
   },
 });
 
