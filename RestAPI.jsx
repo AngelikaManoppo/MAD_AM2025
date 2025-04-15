@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import axios from 'axios';
 import UserCard from './components/useritem/UserCard.jsx';
 
